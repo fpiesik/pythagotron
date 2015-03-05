@@ -1,0 +1,5 @@
+*.txt~
+*.gcode
+*.stl
+/electronics/resources
+
