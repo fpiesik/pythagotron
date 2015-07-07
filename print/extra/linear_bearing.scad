@@ -1,4 +1,5 @@
-// LM8UU
+module linear_bearing(){
+    // LM8UU
 lm8uu_od = 19;
 lm8uu_length = 29;
 lm8uu_id = 10.2;
@@ -100,3 +101,5 @@ union() {
 	
 				}
 }
+}
+//linear_bearing();
