@@ -1,5 +1,5 @@
-#N canvas 0 82 960 998 10;
-#N canvas 960 82 960 998 output 0;
+#N canvas 47 97 1553 818 10;
+#N canvas 951 97 960 998 output 0;
 #X obj 109 143 unpack;
 #X obj 255 142 unpack;
 #X obj 394 142 unpack;
@@ -276,22 +276,22 @@
 #X connect 105 0 59 0;
 #X connect 106 0 16 0;
 #X restore 784 450 pd controller;
-#X obj 584 26 tgl 15 0 play empty Play 17 7 0 10 -262144 -1 -1 1 1
+#X obj 730 79 tgl 15 0 play empty Play 17 7 0 10 -262144 -1 -1 1 1
 ;
-#X obj 722 31 bng 15 250 50 0 reset empty reset 17 7 0 10 -262144 -1
+#X obj 836 53 bng 15 250 50 0 reset empty reset 17 7 0 10 -262144 -1
 -1;
-#X floatatom 667 95 5 1 16 1 seqEnd - seqEnd, f 5;
-#X floatatom 579 95 5 1 16 1 seqStart - seqStart, f 5;
-#X floatatom 640 27 5 1 32 1 stepLen - stepLen, f 5;
-#X obj 654 175 bng 15 250 50 0 rndAll empty rndAll 17 7 0 10 -262144
+#X floatatom 813 148 5 1 16 1 seqEnd - seqEnd, f 5;
+#X floatatom 725 148 5 1 16 1 seqStart - seqStart, f 5;
+#X floatatom 786 80 5 1 32 1 stepLen - stepLen, f 5;
+#X obj 800 228 bng 15 250 50 0 rndAll empty rndAll 17 7 0 10 -262144
 -1 -1;
-#X obj 582 144 bng 15 250 50 0 rndPitch empty rndPitch 17 7 0 10 -262144
+#X obj 728 197 bng 15 250 50 0 rndPitch empty rndPitch 17 7 0 10 -262144
 -1 -1;
-#X obj 652 143 bng 15 250 50 0 rndVel empty rndVel 17 7 0 10 -262144
+#X obj 798 196 bng 15 250 50 0 rndVel empty rndVel 17 7 0 10 -262144
 -1 -1;
-#X obj 582 181 bng 15 250 50 0 rndAct empty rndAct 17 7 0 10 -262144
+#X obj 728 234 bng 15 250 50 0 rndAct empty rndAct 17 7 0 10 -262144
 -1 -1;
-#N canvas 998 209 1553 818 clock 1;
+#N canvas 367 214 1553 818 clock 0;
 #X msg 203 221 248;
 #X msg 138 254 252;
 #X msg 166 255 250;
@@ -314,7 +314,7 @@
 #X obj 162 390 s clock;
 #X obj 322 358 r clock;
 #X obj 400 16 r bpm;
-#X obj 197 119 s bpm, f 6;
+#X obj 121 170 s bpm, f 6;
 #X msg 386 80 60000;
 #X obj 398 50 t b f;
 #X obj 386 112 /;
@@ -337,15 +337,15 @@
 #X obj 202 175 r clock;
 #X obj 203 199 t b;
 #X obj 195 277 spigot;
-#X obj 164 135 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
-1;
+#X obj 164 135 tgl 15 0 empty empty send_Clock 17 7 0 10 -262144 -1
+-1 0 1;
 #X obj 211 333 midiout;
 #X obj 250 22 midirealtimein;
 #X obj 288 124 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
 -1 -1;
 #X obj 248 54 spigot;
-#X obj 163 105 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 1
-1;
+#X obj 163 105 tgl 15 0 empty empty receive_Clock 17 7 0 10 -262144
+-1 -1 0 1;
 #X obj 251 81 sel 248 250 252;
 #X obj 392 151 / 24;
 #X connect 0 0 43 0;
@@ -399,21 +399,51 @@
 #X connect 50 2 1 0;
 #X connect 51 0 26 0;
 #X connect 51 0 17 1;
-#X coords 0 -1 1 1 85 60 1 100 100;
-#X restore 602 232 pd clock;
-#X msg 640 0 16;
-#X msg 585 -26 1;
-#X msg 579 59 1;
-#X msg 667 57 16;
-#X obj 656 -56 t b;
-#X obj 655 -90 loadbang;
-#X obj 681 -71 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+#X coords 0 -1 1 1 160 60 1 100 100;
+#X restore 723 284 pd clock;
+#X msg 786 53 16;
+#X msg 731 27 1;
+#X msg 725 112 1;
+#X msg 813 110 16;
+#X obj 802 -3 t b;
+#X obj 801 -37 loadbang;
+#X obj 827 -18 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
 -1 -1;
+#X obj 17 7 seqmodule \$1 1 \$2 18 24 60;
 #X obj 17 619 seqmodule \$1 3 \$2 18 0 40;
 #X obj 17 692 seqmodule \$1 4 \$2 18 0 40;
 #X obj 17 763 seqmodule \$1 5 \$2 18 0 40;
 #X obj 17 532 seqmodule \$1 2 \$2 18 3 0;
-#X obj 18 10 seqmodule \$1 1 \$2 18 24 60;
+#N canvas 47 54 1553 846 Preset 1;
+#X obj 129 133 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X obj 108 133 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X obj 106 105 hradio 20 1 0 4 empty empty empty 0 -8 0 10 -262144
+-1 -1 0;
+#X obj 170 133 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X obj 149 133 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X obj 13 125 + 1;
+#X msg 108 166 1;
+#X msg 140 165 2;
+#X msg 175 166 3;
+#X msg 207 165 4;
+#X obj 108 199 s writeSeqP;
+#X obj 13 151 s readSeqP;
+#X connect 0 0 7 0;
+#X connect 1 0 6 0;
+#X connect 2 0 5 0;
+#X connect 3 0 9 0;
+#X connect 4 0 8 0;
+#X connect 5 0 11 0;
+#X connect 6 0 10 0;
+#X connect 7 0 10 0;
+#X connect 8 0 10 0;
+#X connect 9 0 10 0;
+#X coords 0 -1 1 1 100 60 2 100 100;
+#X restore 747 507 pd Preset;
 #X connect 12 0 6 0;
 #X connect 13 0 2 0;
 #X connect 14 0 5 0;
@@ -425,4 +455,4 @@
 #X connect 16 0 15 0;
 #X connect 17 0 16 0;
 #X connect 18 0 16 0;
-#X coords 0 -1 1 1 750 900 1 0 0;
+#X coords 0 -1 1 1 900 900 1 0 0;
