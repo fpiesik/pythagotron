@@ -1,11 +1,11 @@
-#N canvas 0 87 1425 818 10;
+#N canvas 87 89 1425 808 10;
 #N canvas 396 149 450 300 (subpatch) 0;
 #X array pitchtable 50 float 3;
-#A 0 3 455 871 1282 1626 1990 2309 2626 2917 3190 3455 3688 3923 4150
-4357 4550 4738 4915 5069 5229 5377 5517 5642 5758 5874 2828 0 0 0 0
-0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0;
+#A 0 21 472 870 1282 1636 1988 2277 2616 2900 3181 3451 3669 3926 4153
+4358 4557 4747 4918 5076 5238 5385 5518 5647 5767 5885 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0;
 #X coords 0 10000 50 0 502 400 1 0 0;
-#X restore 540 170 graph;
+#X restore 541 160 graph;
 #X msg 398 -108 home;
 #X obj 1178 29 r steppos1;
 #X obj 1178 104 s \$0-pos;
@@ -50,15 +50,15 @@
 #X obj 302 5 t b b;
 #X obj 136 774 tabread trgt_scale;
 #X obj 332 320 int;
-#X floatatom 136 809 5 0 0 0 - - -;
+#X floatatom 136 809 5 0 0 0 - - -, f 5;
 #X msg 329 36 -1;
 #X obj 285 667 * 100;
-#X floatatom 223 737 5 0 0 0 - - -;
+#X floatatom 223 737 5 0 0 0 - - -, f 5;
 #X obj 285 730 int;
 #X obj 285 758 -;
 #X obj 313 731 r \$0-root;
 #X obj 270 791 -;
-#X floatatom 193 836 5 0 0 0 - - -;
+#X floatatom 193 836 5 0 0 0 difference_(cent) - -, f 5;
 #X obj 285 697 + 0.5;
 #X obj 302 137 int;
 #X obj 285 938 r \$0-pos;
@@ -68,7 +68,7 @@
 #X msg 270 1007 pos \$1;
 #X obj 270 1035 s \$0-stepper;
 #X obj 270 963 +;
-#X floatatom 209 965 5 0 0 0 - - -;
+#X floatatom 209 965 5 0 0 0 go_to_position - -, f 5;
 #X obj 176 99 sel 0 1;
 #X obj 203 126 r \$0-seekdel;
 #X obj 176 148 delay;
@@ -76,14 +76,14 @@
 #X obj 176 71 r \$0-match;
 #X obj 172 337 tabwrite pitchtable;
 #X obj 172 250 r \$0-pos;
-#X floatatom 124 278 5 0 0 0 - - -;
+#X floatatom 124 278 5 0 0 0 - - -, f 5;
 #X obj 1182 -50 r max_step1_pos;
 #X obj 1182 -16 s \$0-max_pos;
 #X obj 446 5 r \$0-max_pos;
 #X obj 1055 65 s max_step1_pos;
 #X obj 446 112 -;
 #X obj 464 32 r \$0-pos;
-#X floatatom 485 106 5 0 0 0 - - -;
+#X floatatom 485 106 5 0 0 0 - - -, f 5;
 #X obj 464 59 t b f;
 #X obj 302 162 spigot;
 #X obj 446 138 > 0;
@@ -92,9 +92,9 @@
 #X obj 302 189 t b f f f b b;
 #X obj 282 236 s \$0-index;
 #X obj 548 843 r \$0-index;
-#X floatatom 550 878 5 0 0 0 - - -;
+#X floatatom 550 878 5 0 0 0 - - -, f 5;
 #X obj 597 657 r pitch;
-#X floatatom 613 717 5 0 0 0 - - -;
+#X floatatom 613 717 5 0 0 0 - - -, f 5;
 #X obj 373 841 expr sqrt($f1*$f1);
 #X obj 404 872 r \$0-tolerance;
 #X obj 373 889 <=;
@@ -115,11 +115,11 @@
 #X obj 396 -162 r \$0-process;
 #X obj 397 -132 sel 1;
 #X obj 446 161 change;
-#X floatatom 352 164 5 0 0 0 - - -;
+#X floatatom 352 164 5 0 0 0 - - -, f 5;
 #X obj 1123 137 \$0;
 #X obj 1123 112 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
 -1 -1;
-#X floatatom 424 910 5 0 0 0 - - -;
+#X floatatom 424 910 5 0 0 0 - - -, f 5;
 #X obj 1053 15 loadbang;
 #X obj 1132 393 r scale;
 #X obj 1089 612 tabwrite trgt_scale;
@@ -137,27 +137,27 @@
 #X msg 1365 -32 \; scale 76 193 310 386 503 579 696 772 890 1007 1083
 1200;
 #X msg 1366 -81 zarlino \; scale 204 386 498 702 884 1088 1200;
-#X floatatom 326 775 5 0 0 0 - - -;
+#X floatatom 326 775 5 0 0 0 - - -, f 5;
 #X msg 1011 -63 spd 30;
 #X msg 1575 269 \; pitchtable write scales/rarlino.txt;
-#X msg 1348 231 \; pitchtable read scales/rarlino.txt;
+#X msg 1320 272 \; pitchtable read scales/rarlino.txt;
 #X obj 554 -172 loadbang;
 #X text 850 -106 create equal scale;
 #X text 1365 -111 create custom scales;
 #X text 1132 251 general paras;
-#X floatatom 320 970 5 0 0 0 - - -;
-#X floatatom 229 680 5 0 0 0 - - -;
-#X floatatom 340 651 5 0 0 0 - - -;
-#X floatatom 175 557 5 0 0 0 - - -;
+#X floatatom 312 961 5 0 0 1 current_position - -, f 5;
+#X floatatom 229 680 5 0 0 0 averaged_pitch - -, f 5;
+#X floatatom 340 651 5 0 0 0 - - -, f 5;
+#X floatatom 175 557 5 0 0 0 - - -, f 5;
 #X msg 402 516 0;
 #X obj 228 423 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
 -1 -1;
 #X msg 223 449 31;
 #X msg 1129 164 \; \$1-root 2400 \; \$1-smpldel 500 \; \$1-smpltme
 1000 \; \$1-seekdel 500 \; \$1-tolerance 1 \;;
-#X msg 1352 273 \; pitchtable read scales/equal.txt;
+#X msg 1360 235 \; pitchtable read scales/equal.txt;
 #X text 1416 205 save and load scales;
-#X msg 1573 231 \; pitchtable write scales/equal.txt;
+#X msg 1603 231 \; pitchtable write scales/equal.txt;
 #X msg 870 -81 24;
 #X obj 270 820 / 2;
 #X obj 270 985 int;
