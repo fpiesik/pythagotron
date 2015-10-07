@@ -11,10 +11,6 @@ rotate([0,0,0]){
 difference(){
 union(){
 
-//jackmount
-
-
-
 //--------------------------
 cube([width,depth,height],center=true);
 translate([width/2,0,0]){
@@ -34,8 +30,6 @@ cylinder(d=screwdia,h=depth+1,center=true);}
 }
 
 
-
-
 translate([roddistance/2,roddia,0]){
 cube([roddia,depth,roddia],center=true);}
 translate([-roddistance/2,roddia,0]){
@@ -47,4 +41,23 @@ cube([roddia,depth,roddia],center=true);}
 }
 
 }
+
+module endstopmountB(){
+mountZ=1.5;
+mountAY=stiffroddia*2;
+mountBY=25;
+swX=20;
+
+difference(){
+cube([screedwidth,mountAY,mountZ],center=true);
+translate([screedwidth/2-stiffroddia,0,0]){
+cylinder(d=stiffroddia,h=mountZ,center=true);
+}
+translate([-screedwidth/2+stiffroddia,0,0]){
+cylinder(d=stiffroddia,h=mountZ,center=true);}
+}
+translate([(screedwidth-swX)/2,mountBY/2+mountAY/2,0])cube([swX,mountBY,mountZ],center=true);
+
+}
 //endstopmountA();
+//endstopmountB();
