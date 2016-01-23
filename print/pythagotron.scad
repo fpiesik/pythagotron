@@ -14,6 +14,7 @@ include <stringshorter.scad>;
 include <endstop_mount.scad>;
 include <piezo_pickup.scad>;
 include <pick.scad>;
+include <stand.scad>;
 
 
 
@@ -71,6 +72,8 @@ color(railcolor)rails();}
 translate([0,0,250])damper(1);
 
 translate([0,-raildistance/2,550])stringshorter(1);
+
+color(basecolor)stand();
 
 
 /*

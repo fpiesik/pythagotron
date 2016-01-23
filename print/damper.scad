@@ -373,4 +373,4 @@ rotate([90,0,0])linear_gear();
 }
  }   
     
-//damper(4);
+//damper(1);

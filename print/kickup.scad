@@ -6,19 +6,24 @@ module kickup(orientation){
 
  
 hub=4;
-bottom=6;
-top=6;
 
-magdia=5.2;
+top=4;
+
+magdia=5.7;
 magZ=20;
-magscrewdia=3;
+magscrewdia=4.8;
+magthreadZ=5;
+
+bottom=magZ-hub+1;
+
 
 coildia=14;
 upperidlerZ=2;
 loweridlerZ=2;
 threaddepth=4;
-coilZ=magZ-bottom+threaddepth;
-magholedia=5.7;
+coilZ=18; //magZ-bottom+threaddepth;
+echo(coilZ);
+magholedia=magdia;
 wallthick=1;
 coilthreaddia=4.9;
 
@@ -37,12 +42,15 @@ echo(baseZ);
 
 
 jackX=6.5;
-jackY=3;
+jackY=3.5;
+jackZ=10;
 jacksupport=2;
 jackpindia=1.5;
 jackpindist=2.54;
 jackpinsupport=1.5;
 
+mountdepth=roddia*3;
+mountsupportY=2;
 
 $fn=32;
 
@@ -56,19 +64,22 @@ module Ccube( size, align = [ 0, 0, 0 ] ){
 
 module base(){
 difference(){
+Ccube([baseX,baseY,magthreadZ],[0,0,1]);
+cylinder(d=magscrewdia,h=baseZ+1);
+}
+translate([0,0,magthreadZ]){
+difference(){
 Ccube([baseX,baseY,baseZ],[0,0,1]);
 translate([0,0,bottom])Ccube([innerX,innerY,innerZ],[0,0,1]);
 cylinder(d=magdia,h=baseZ+1);
-translate([0,0,bottom/2]){
-rotate([0,90,0])cylinder(d=magscrewdia,h=baseX+1,center=true);}
-}
+}}
 
 translate([0,-(baseY/2+(jackY+jacksupport)/2),0]){
 difference(){
-translate([0,0,0])Ccube([jackX+jacksupport*2,jackY+jacksupport,bottom],[0,0,1]);
-translate([0,jacksupport/2,0])Ccube([jackX,jackY,bottom-jackpinsupport],[0,0,1]);
-translate([jackpindist/2,jacksupport/2,0])cylinder(d=jackpindia,h=bottom);
-translate([-jackpindist/2,jacksupport/2,0])cylinder(d=jackpindia,h=bottom);
+translate([0,0,0])Ccube([jackX+jacksupport*2,jackY+jacksupport,jackZ],[0,0,1]);
+translate([0,jacksupport/2,0])Ccube([jackX,jackY,jackZ-jackpinsupport],[0,0,1]);
+translate([jackpindist/2,jacksupport/2,0])cylinder(d=jackpindia,h=jackZ);
+translate([-jackpindist/2,jacksupport/2,0])cylinder(d=jackpindia,h=jackZ);
 }}
 
 
@@ -96,12 +107,12 @@ cylinder(d=coilthreaddia,h=coilZ+1);
 
 if(orientation==1){
 base();
-translate([0,0,bottom])rotate([0,0,0])coil();
+translate([0,0,bottom+threaddepth])rotate([0,0,0])coil();
 }
 
 if(orientation==2){
 base();
-translate([25,0,0])rotate([0,0,0])coil();
+//translate([25,0,0])rotate([0,0,0])coil();
 }
 
 }
@@ -109,21 +120,19 @@ translate([25,0,0])rotate([0,0,0])coil();
 module kickupmount(){
 
 height=6;
-depth=roddia*3;
+depth=mountdepth;
 width=roddistance+roddia;
-screwdia=3;
-screwnumber=2; //one or two screws
-screwdistance=10; //if two screws
 servowidth=33;
 servodepth=15.5;
-servosupportX=8;
-servosupportY=8;
-sink=2;
+supportX=8;
+supportY=mountsupportY;
+
+
 
 ziptieX=3;
 ziptieY=6;
 
-offsetY=15;
+offsetY=10;
 
 rotate([0,0,0]){
 difference(){
@@ -136,10 +145,10 @@ cylinder(d=depth,h=height,center=true);}
 translate([-width/2,0,0]){
 cylinder(d=depth,h=height,center=true);}
 translate([0,offsetY,0]){
-cube([servodepth+servosupportX*2,servowidth,height],center=true);
+cube([servodepth+supportX*2,depth,height],center=true);
 }}
-translate([0,baseZ/2,height/2]){
-cube([servodepth,baseZ,height],center=true);
+translate([0,baseZ-depth/2+supportY,height/2]){
+cube([servodepth,baseZ*2,height],center=true);
 
 
 
@@ -159,10 +168,10 @@ translate([-roddistance/2,-depth/2,0]){
 cube([roddia,depth,roddia],center=true);}
 
 }
-translate([0,offsetY,0]){
-translate([servodepth/2+servosupportX/2,0,0]){
+translate([0,0,0]){
+translate([servodepth/2+supportX/2,0,0]){
 cube([ziptieX,ziptieY,height+1],center=true);}
-translate([-(servodepth/2+servosupportX/2),0,0]){
+translate([-(servodepth/2+supportX/2),0,0]){
 cube([ziptieX,ziptieY,height+1],center=true);}
 }
 }
@@ -170,12 +179,12 @@ cube([ziptieX,ziptieY,height+1],center=true);}
 }
 
 if(orientation==1){
-color(actcolor)translate([0,0,baseX/2])rotate([-90,90,0])solenoid();
+color(actcolor)translate([0,-mountdepth/2+mountsupportY,baseX/2])rotate([-90,90,0])solenoid();
 color(basecolor)kickupmount();
-color(boltcolor)translate([0,baseZ/2,baseX/2])rotate([-90,0,0])bolt(4,30);
+color(boltcolor)translate([0,baseZ/2+-mountdepth/2+mountsupportY,baseX/2])rotate([-90,0,0])bolt(4,30);
 }
 if(orientation==2){
-color(actcolor)translate([0,-40,0])rotate([0,0,0])solenoid();
+//color(actcolor)translate([0,-40,0])rotate([-90,0,0])solenoid();
 color(basecolor)kickupmount();
 
 }
@@ -183,3 +192,18 @@ color(basecolor)kickupmount();
 
 //kickup(2);
 
+module cap(){
+i_dia=10;
+o_dia=14;
+//headZ=4;
+difference(){
+union(){
+difference(){
+sphere(d=o_dia);
+translate([0,0,-o_dia/2])cube([o_dia,o_dia,o_dia],center=true);}
+translate([0,0,-i_dia/2])cylinder(d=o_dia,h=i_dia/2);
+}
+translate([0,0,-i_dia/2])cylinder(d=i_dia,h=i_dia/2);
+}
+}
+//cap();
