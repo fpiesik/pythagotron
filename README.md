@@ -1,4 +1,4 @@
-Pythagoras of Samos was a man with many hobbys. I know him for his experiments with strings and their musical properties. Thats why I call this robotic string instrument “Pythagotron”.
+Pythagoras of Samos was a man with many hobbys. I know him primarily for his experiments with strings and their musical properties. Thats why I call this robotic string instrument “Pythagotron”.
 
 It features:
 
