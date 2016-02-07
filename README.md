@@ -10,5 +10,5 @@ It features:
 -open source
 
 
-It's a parametric design made with OpenScad. You can view the all pieces put together by opening the file /print/pythagotron.scad. This preview differs a little from the actual way I put it together (see pictures).
-To change to the parameters, open /print/configuration.scad. You can also view or export every piece by opening the corresponding .scad file and uncomment the module at the end of the file.
+It's a parametric design made with OpenScad. You can view all the pieces put together by opening the file /print/pythagotron.scad. This preview differs a little from the actual way I put it together (see pictures).
+To change the parameters, open /print/configuration.scad. You can also view or export every single piece by opening the corresponding .scad file and uncomment the module at the end of the file.
