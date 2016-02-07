@@ -1,5 +1,4 @@
 *.txt~
 *.gcode
-*.stl
 /electronics/resources
 /doc/video

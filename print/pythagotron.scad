@@ -73,7 +73,7 @@ translate([0,0,250])damper(1);
 
 translate([0,-raildistance/2,550])stringshorter(1);
 
-color(basecolor)stand();
+color([0.5,0.5,0.5])stand();
 
 
 /*
