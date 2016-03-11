@@ -4,16 +4,28 @@ Servo servo2;
 
 const int home1_pin = 13;  //Digital input 1
 const int home2_pin = 12;  //Digital input 2
-const int analogAux1_pin = A0;// A6 Hardware ref1
-const int analogAux2_pin = A1;// A7  "
 
-const int step1_stpPin = 3; //3  "
-const int step1_dirPin = 4;  //2  "
-const int step1_enblPin = 2; //4  "
+//-------choose hardware---------------------
+//uncomment if Hardware V1
+const int analogAux1_pin = A6;
+const int analogAux2_pin = A7;
+const int step1_stpPin = 3;
+const int step1_dirPin = 2;
+const int step1_enblPin = 4;
+const int step2_stpPin = 6; 
+const int step2_dirPin = 5;
+const int step2_enblPin = 7;
 
-const int step2_stpPin = 6; //6  "
-const int step2_dirPin = 7;  //5  "
-const int step2_enblPin = 5; //7  "
+//uncomment if hardware V2
+//const int analogAux1_pin = A0;// A6 Hardware ref1
+//const int analogAux2_pin = A1;// A7  "
+//const int step1_stpPin = 3;
+//const int step1_dirPin = 4; 
+//const int step1_enblPin = 2;
+//const int step2_stpPin = 6;
+//const int step2_dirPin = 7;  
+//const int step2_enblPin = 5; 
+//--------------------------------------------
 
 const int mosfet1_pin = 10; 
 const int mosfet2_pin = 11;
@@ -443,6 +455,20 @@ void stepRmpup(byte stepper){
   
 }
 
+void setServo(byte servo,byte pos){
+if (servo==1 && pos!=0){
+  servo1.attach(servo1Pin);
+  servo1.write(pos);
+ }
+if (servo==2 && pos!=0){
+  servo2.attach(servo2Pin);
+  servo2.write(pos);
+ }
+
+ if (servo==1 && pos==0) servo1.detach();
+ if (servo==2 && pos==0) servo2.detach();
+ 
+}
 
 void setup() 
 {                
@@ -510,22 +536,20 @@ if (Serial.available()) {
             if (incoming == 3) step_setSpd(1,serbyte);
             if (incoming == 4) stepSndpos(1);
             if (incoming == 5) step1_trgtA=serbyte;
-            if (incoming == 6) {
-              step1_trgtB=serbyte; 
-              stepGo2pos(1);}
+            if (incoming == 6) {step1_trgtB=serbyte; 
+                                stepGo2pos(1);}
             //Stepper2 
             if (incoming == 7) step_home(2);
             if (incoming == 8) stepEnbl(2,serbyte);
             if (incoming == 9) step_setSpd(2,serbyte);
             if (incoming == 10) stepSndpos(2);
             if (incoming == 11) step2_trgtA=serbyte;
-            if (incoming == 12) {
-              step2_trgtB=serbyte; 
-              stepGo2pos(2);}
+            if (incoming == 12) {step2_trgtB=serbyte; 
+                                 stepGo2pos(2);}
               
               
-            if (incoming == 13) servo1.write(serbyte);
-            if (incoming == 14) servo2.write(serbyte);
+            if (incoming == 13) setServo(1,serbyte);
+            if (incoming == 14) setServo(2,serbyte);
             if (incoming == 15) mosfet(1,serbyte);
             if (incoming == 16) mosfet(2,serbyte);
             
