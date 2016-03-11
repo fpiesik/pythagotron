@@ -506,11 +506,7 @@ void setup()
   digitalWrite(mosfet1_pin, LOW);
   digitalWrite(mosfet2_pin, LOW);
   
-  servo1.attach(servo1Pin);
-  servo1.write(servo1_strtPos);
   
-  servo2.attach(servo2Pin);
-  servo2.write(servo2_strtPos);
   
   step_home(2);
   step_home(1);
